@@ -22,13 +22,11 @@ class ResNeXtBlock(nn.Module):
         stride = 1
         if self.downsample:
             stride = 2
-        conv1 = nn.Conv2d(self.in_channels, self.in_channels, kernel_size=1, stride=1)
-        bn1 = nn.BatchNorm2d(self.in_channels)
-        conv2 = nn.Conv2d(
-            self.in_channels, self.in_channels, kernel_size=3, stride=stride, padding=1
-        )
-        bn2 = nn.BatchNorm2d(self.in_channels)
-        conv3 = nn.Conv2d(self.in_channels, self.out_channels, kernel_size=1, stride=1)
+        conv1 = nn.Conv2d(self.in_channels, 4, kernel_size=1, stride=1)
+        bn1 = nn.BatchNorm2d(4)
+        conv2 = nn.Conv2d(4, 4, kernel_size=3, stride=stride, padding=1)
+        bn2 = nn.BatchNorm2d(4)
+        conv3 = nn.Conv2d(4, self.out_channels, kernel_size=1, stride=1)
         bn3 = nn.BatchNorm2d(self.out_channels)
         return nn.Sequential(
             conv1, bn1, self.relu, conv2, bn2, self.relu, conv3, bn3, self.relu
